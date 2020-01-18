@@ -1,0 +1,117 @@
+CS 235 Midterm
+Version 0.6
+Instructor: R. P. Burton
+May 26 – 31, 2017 (Friday - Wednesday)
+Due in the Lab on Wednesday no later than 8:00 p.m.
+Penalty for submitting the midterm late:
+20 points per day (including weekend days), advancing at 8:01 p.m. each day
+Open Book (142 course text and your CS 235 course text only), Open Notes (personal notes including your own Lab solutions)
+Open Course Website and the reference section of www.cplusplus.com, but no other Internet resources (no Google or StackOverflow)
+Closed Neighbor (and everyone is thy neighbor)
+*Instructions*
+(Please read carefully)
+1. This midterm consists of a C++ programming problem and an extra credit feature. Read and understand the statement of the problem completely before beginning to design, code, and test. As part of your design, prepare a UML diagram and consider the test cases that will establish the correctness of your solution. Test your solution thoroughly before submitting it.
+2. Produce a solution, which consists of your C++ code, with a comment at the beginning of each file (both .h and.cpp) which includes your name, and “CS 235 Spring 2017 Midterm.” When you are finished, go to the course website and follow the link labeled “Submit Exam” in the Grades menu. Upload your completed project by compressing the files and submitting through Learning Suite with TA assistance. If a packet is not collected by a TA upon submission, your midterm will not be graded and you will receive no credit. Attribute any code taken from or based on other sources (excluding the authorized sources). Attributed code copied from or based heavily on outside sources is worth half credit. Unattributed code copied from or based heavily on outside sources is worth no credit.
+3. Understanding the problem correctly is part of the examination. If something seems unclear, ask a CS 235 TA (but no one else) for clarification. You may pose questions to the CS 235 TAs at any time. However, the TAs, generally, are not permitted to answer questions related to design, C++ implementation, debugging, or testing.
+4. Prior to submitting your midterm, score it using the attached scoring sheet (this will help you maximize your points and will help us grade your exam accurately). If your score is within 5 points of the TA score (inclusive), you get a 3 point bonus. If your score is within 6 to 15 points of the TA score (inclusive), no bonus or penalty is imposed. If your score differs by more than 15 points from the TA score, you lose 3 points.
+5. Your solution packet must be stapled together before it will be accepted by a TA, even if this results in a late submission penalty.
+6. Submit your lab packet to a TA at the time that you submit your code on LearningSuite. Because there will not be any TAs available on Saturday, Sunday, or Monday you may submit your code on LearningSuite without TA help on Saturday, Sunday, or Monday as long as you submit your lab packet to the TA office on the following Tuesday. Note that you will still receive the late penalty for submitting on the following Saturday or Sunday and free lab late days cannot be applied to the midterm.
+7. Sign the grading sheet to request that your midterm be graded and to certify that no unfair information related to the midterm has been received by you, either directly or indirectly, and that none will be conveyed by you. If we discover that you cheated or assisted someone in cheating, intentionally or unintentionally (including accidentally), your score for this exam may (and probably will) be rand() % 1.
+We’re serious.
+Three is a Magic Number
+The purpose of this midterm is to create a program that can discern a number that the user is thinking of by following a deterministic algorithm. Implement the algorithm using your own linked list(s). If other pre-defined data structures are used, you will be subject to a 50% penalty on any section where something other than your own linked list is used. Each number will be represented as a node in your linked lists.
+Trick Explanation
+This trick is generally performed using cards with the goal being to discern the card that someone is thinking of. Instead of cards, we will use numbers, but the process is the same either way. See the example near the end of this document for a visual representation of the process.
+1. Prompt the user to think of a number from 1 to 21. Do not ask for him or her to input the number. It is your program’s job to figure out what that number is.
+2. Place all numbers (nodes) from 1 to 21 into the same linked list and shuffle it.
+3. Create three new linked lists by removing one number at a time from the head of the original linked list and adding it to the tail of one of the new linked lists starting from the first new linked list, then the second, then the third, and going back to the first. Repeat this until there are no more nodes in the original linked list and seven nodes in each of the three new linked lists.
+4. Display the contents of the three linked lists and prompt the user to indicate which linked list contains his or her number. Do not ask for the number or its location in the linked list.
+5. Consolidate the linked lists by appending one to the tail of another and the final list to the tail of the combined linked lists. Make sure that the linked list that contains the number in it is placed in the center position. Which of the other two linked lists get placed on the front or back does not matter. For example, if the number is located somewhere in the first linked list, it could be appended to the tail of either the second or third linked list. The remaining linked list would then be appended to the tail of those combined lists.
+6. Repeat steps 3 through 5 two more times. The 11th (exact middle) node in the combined linked list should be their chosen number; if not, something was done incorrectly. Display the number to the user.
+7. Ask if the user would like the program to discern another number. If so, reset all the linked lists and start the trick again. If not, close the program.
+No test driver or main will be provided. You will be required to create your own main function to prompt the user and to start the algorithm. Use what you have learned in Lab 4 to help you with your
+main function and user interface. You must also create a class to perform the actual algorithm operations. Do not program it all in the main function; points will be deducted if you do so.
+**All user input needs to be bullet-proofed so that nothing unexpected happens when input is given that is not allowed.
+There is no interface for the midterm, but the following functions should be implemented in order to pass off the midterm:
+shuffle()
+Shuffles the linked list. This is more than just moving around a few nodes. The linked list should be visibly shuffled and every time the algorithm is started, a different shuffled order should result.
+dealRows(int)
+Step 3 of the algorithm. Creates three new linked lists from one single linked list by removing one number at a time from the head of the original linked list and adding it to the tail of one of the new linked lists starting from the first new linked list, then the second, then the third, and going back to the first until all nodes have been removed from the original linked list. If doing the extra credit activity (see below), the input parameter is the number of new linked lists being created.
+consolidate(int)
+Step 5 of the algorithm. Appends each linked list to the tail of another until one single linked list is created. The input parameter is the number of the linked list that contains the user’s number. This linked list must be placed in the center. If doing the extra credit activity where there could be more than three linked lists, make sure that the linked list containing the user’s number is still placed in the center, not just the second position as it would be with three linked lists.
+Extra Credit
+This trick can be performed using more than just 21 numbers and 3 rows. Discover a general rule for how many repetitions of step 3 through 5 of the algorithm must by performed for any number of cards and/or any number of rows. Add to your program the option to choose the number range from which the user wants to think of a number and the quantity of rows into which he or she wants to split the numbers. Once the range and/or number of rows have been chosen, display to the user the number of repetitions that will be executed. Keep in mind that for this trick there are a few restrictions:
+ The number of rows must be odd or there will be no way to append the linked list with the user’s number in the middle.
+ The max number (at the high end of the range) must be odd or there will be no middle position for the user’s number at the termination of the algorithm.
+ The max number must be divisible by the number of rows or some rows may have fewer numbers. This is not required for the algorithm, but consolidation order otherwise becomes far more complicated than only making sure the linked list with the number is placed in the center of the other linked lists.
+By the nature of the algorithm, no matter how many rows or how many numbers are used, if steps 3 through 5 are repeated enough, the number will find its way to the center of the consolidated
+linked list. The goal of the extra credit is to find the user’s selected number with the least number of repetitions. We know the general rule and will be comparing how many repetitions were used with how many are actually needed.
+Trick Explanation Using Cards
+This trick is generally performed using cards, so this example will do the same. Feel free to practice it with actual cards in order to understand the algorithm better.
+There is a total of 21 cards (nodes) numbered from 1 to 21:
+1.) Have the user think of a number from 1 to 21. For this example, we use the number 15.
+2.) Combine all cards (insert them into the same linked-list) and shuffle them.
+3.) Create 3 new rows of cards (linked-lists) by adding one card at a time from the top of the deck (head) to the end (tail) of each row until all 3 rows have seven cards.
+4.) Ask the user which of the three rows of cards contains his or her number is in (not the location of the number or what the number is). We see in our example that it is in the top row.
+5.) Consolidate the 3 rows by appending one row to the tail of another row and then the final row to the tail of the combined rows, making sure that the selected row is placed in between the other two rows. Which row goes in the front or back does not matter. You should once again have one collection of cards (linked-list) containing all the numbers.
+6.) Repeat steps 3 through 5 two more times. The 11th (exact middle) card in the final collection of cards should be the chosen number. If it is not, something was done incorrectly.
+UML Diagram
+You must also provide a UML diagram in order to receive full credit for the midterm. Your diagram should include every class that you use and should contain all the elements of a standard UML diagram (connecting lines showing relationships between classes, data members and functions of each
+class, etc.). You must include your UML in a universally readable format (preferably PDF) with your midterm code when you submit it on Learning Suite.
+Valgrind
+To receive full credit, your program must pass Valgrind. You may run this through the terminal on the Linux machines. You must first navigate to your project folder and find your project’s executable file. If you do not have an executable file, you can make one through the terminal command:
+g++ -std=c++11 -o <name of executable file you want to create> *.h *.cpp
+e.g.
+g++ -std=c++11 -o programName *.h *.cpp
+This will create an executable file with the name you entered within your project code folder. Now to run the program with Valgrind, the command is:
+valgrind --tool=memcheck --leak-check=yes ./<name of executable>
+e.g.
+valgrind --tool=memcheck --leak-check=yes ./ programName
+If the result of running this command says:
+All heap blocks were freed -- no leaks are possible
+and there are no other Valgrind-related errors (such as invalid reads/writes, conditional jumps, etc.) then you passed Valgrind :)
+Note that there is a bug with the current version of the g++ compiler that will cause a memory leak of exactly 72,704 bytes in 1 block. If you have exactly 72,704 bytes leaked in 1 block and no other Valgrind errors, you will still receive full credit.
+If you have any questions about how to use the terminal to create an executable file and run Valgrind, you may ask the TAs to demonstrate how to run a program through the terminal.
+Midterm Submission
+The midterm is due on Wednesday, May 31st at 8:00PM. When you are finished with your solution and UML diagram, have filled out the grading sheet, and are ready to submit your midterm, prepare your files for submission and find a TA. Then, with a TA present, go to the course website and follow the link labeled “Submit Exam” in the Grades menu. With a TA present, compress your files, including your UML, and submit the compressed folder to LearningSuite. The TA will then collect your packet and verify that you have signed the grading sheet.
+Note: Please double- and triple-check that you are zipping and submitting the correct code when you submit your midterm and that your UML is included. Any re-submission of midterm code will incur the full late day penalties based on when the code is re-submitted after the deadline.
+Due to the large number of students who may want to submit on Wednesday evening, the TAs will be working with students on a first-come first-served basis on the final evening of submission. In
+order to be fair to students who have finished the lab and wish to submit, there will be a line outside of the TA office for students who are ready to submit their midterms. You must be in this line before 7:45 on Friday evening in order to submit your midterm on time. At 7:45 the line will be closed and students who are in the line will be helped. All further submissions will be counted as late. The TAs will make announcements in the computer labs at 7:35 and 7:40 so that students are not caught off guard by the deadline.
+A Few Good Hints:
+You will find in your coding career that you can save a ton of time and heartache by designing a solution before implementing it. Remember the wisdom of the ancients who observed that “8 hours of programming can sometimes save you up to 10 minutes with a pen and paper.”
+You’ve already coded a linked list; consider using your code as a basic outline for how to implement your linked list. Think about what functions you will need in order to insert into and remove from a linked list, and consider how you might use those functions to implement your solution. You should have also coded a user interface in Lab 4. Use what you learned there to make coding the user interface for this midterm easy.
+Draw pictures of your linked list to make sure that you have considered all the relevant pointers, etc. that need to change with each insert/delete.
+Test your code as you go: bugs become much more complicated and harder to find as you write more lines of code. Test as you go to make sure that you don’t have any sneaky bugs that would have been easy to remove if you had found them earlier. For example, you might first write and test your linked list insert and remove functions, then take one function at a time in your class and get it working before moving on to the next part of the midterm.
+Design your test cases before beginning to code. You don’t need to spend a lot of time doing it, but your test cases are much more likely to be complete if you spend 30 seconds thinking of all the border cases that you can and then writing up the code to test whether or not you have a working solution.
+Grading Sheet
+Student Name______________________ Net ID:______________ TA Initials____
+(print) Days Late____
+Student: TA: Main Interface:
+__ / 5pts __ / 5pts 1. User interface is neat, consistent, and easily readable.
+__ / 5pts __ / 5pts 2. Invalid input is caught; user is re-prompted for valid input.
+__ / 5pts __ / 5pts 3. When quitting, program does not crash, but closes gracefully.
+Trick Functions:
+__ / 10pts __ / 10pts 1. shuffle () results in a visibly shuffled linked list.
+__ / 10pts __ / 10pts 2. dealRows() correctly creates 3 new linked lists of equal size. Nodes are added in the correct order.
+__ / 10pts __ / 10pts 3. consolidate() correctly appends the linked lists together with the linked list containing the user’s number placed in the middle.
+Trick Execution:
+__ / 5pts __ / 5pts 1. No numbers (nodes) are lost or duplicated.
+__ / 5pts __ / 5pts 2. Linked lists (rows) are displayed in an easy-to-read fashion.
+__ / 10pts __ / 10pts 3. For 21 numbers and 3 rows, only 3 repetitions are executed.
+__ / 10pts __ / 10pts 4. The program correctly discerns the user’s number.
+__ / 5pts __ / 5pts 5. When choosing to start again, the program does not crash, all linked lists are cleared, and the program can execute the trick again.
+General Rule: (extra credit)
+__ / 5pts __ / 5pts 1. Successfully implement the general rule for any range of numbers from 1 to a valid maximum inputted by the user.
+__ / 5pts __ / 5pts 2. Successfully implement the general rule for any odd number of rows.
+__ / 5pts __ / 5pts 3. The number of repetitions required before the user’s number is discerned is the minimum number required for the given range and/or rows. The number of repetitions is displayed once the range and/or number of rows has been chosen.
+Other:
+__ / 10pts __ / 10pts 1. Program passes Valgrind with no memory leaks or other Valgrind errors and does not crash (no partial credit).
+__ / 5pts __ / 5pts 2. UML diagram is neat, correctly formatted, and complete.
+__ / 5pts __ / 5pts 3. Neat and consistent code with comments where appropriate. The program is functionally decomposed into an appropriate number of classes.
+__ / Total __ / Subtotal
+__ / Late Penalty (20 points per day)
+__ / Accurate Grading Bonus (+3/0/-3)
+___ / Total
+Hours spent on Linked List:_____ Hours spent on Trick Algorithm: ______ Total time spent: _____
+_______________________________ _____________________________
+Student Signature TA Grader (print name)
